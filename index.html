@@ -78,9 +78,9 @@ const ing=(key,qty,label)=>({key,qty,label:label||key});
 const cost=a=>a.reduce((s,x)=>s+(U[x.key]?.[0]||0)*x.qty,0);
 const rec=(name,output,items,note='')=>({name,output,items,note,cost:cost(items)});
 const makeKuning=i=>{const x=[
- {pax:20,price:950000,tampah:27500,cm:45,rice:2500,kara:250,chick:20,egg:6,tempe:250,mie:800,urap:300,potato:200,pete:1,sambal:150},
- {pax:30,price:1250000,tampah:29500,cm:55,rice:3500,kara:250,chick:32,egg:8,tempe:300,mie:1000,urap:360,potato:270,pete:1.2,sambal:190},
- {pax:40,price:1450000,tampah:37500,cm:65,rice:4500,kara:350,chick:40,egg:10,tempe:360,mie:1000,urap:430,potato:340,pete:1.5,sambal:230}
+ {pax:20,price:950000,tampah:20000,cm:42,rice:2500,kara:250,chick:20,egg:6,tempe:250,mie:800,urap:300,potato:200,pete:1,sambal:150},
+ {pax:30,price:1250000,tampah:23000,cm:47,rice:3500,kara:250,chick:32,egg:8,tempe:300,mie:1000,urap:360,potato:270,pete:1.2,sambal:190},
+ {pax:40,price:1450000,tampah:25000,cm:52,rice:4500,kara:350,chick:40,egg:10,tempe:360,mie:1000,urap:430,potato:340,pete:1.5,sambal:230}
 ][i]; const f=i===0?1:i===1?1.22:1.45; const g=Math.round;
  const recipes=[
   rec('Nasi kuning',`±${N(x.rice*2/1000)} kg nasi matang`,[ing('rice',x.rice,'beras'),ing('yellow',x.rice*.1,'bumbu kuning giling'),ing('oil',x.rice*.06,'minyak goreng'),ing('salt',3*f,'garam'),ing('totole',3*f),ing('sasa',6*f),ing('sugar',2*f,'gula pasir'),ing('sereh',i+1),ing('salam',2+i),ing('jeruk',2+i),ing('kara',x.kara,'santan Kara'),ing('rice',0,'air')],'Rasio nasi diturunkan untuk memenuhi target HPP; isi tampah dibantu plating lauk.'),
@@ -93,9 +93,9 @@ const makeKuning=i=>{const x=[
   rec('Garnish & daun pisang','1 set',[ing('longbean',10*f,'kacang panjang garnish'),ing('cabe',30*f,'cabe merah besar'),ing('cabbage',60*f,'timun / alokasi sayur'),ing('banana',[.2,.25,.33][i],'daun pisang')],'Estimasi timun menggunakan harga sayur sebagai alokasi konservatif.')
  ]; return {...x,type:'Tumpeng Kuning',recipes}; };
 const makeLiwet=i=>{const x=[
- {pax:20,price:950000,tampah:27500,cm:45,rice:2500,chick:20,tofu:8,tempe:200,egg:10,toge:300,sambal:150},
- {pax:30,price:1250000,tampah:29500,cm:55,rice:3500,chick:24,tofu:12,tempe:300,egg:12,toge:430,sambal:190},
- {pax:40,price:1450000,tampah:37500,cm:65,rice:4500,chick:27,tofu:16,tempe:400,egg:16,toge:600,sambal:230}
+ {pax:20,price:950000,tampah:20000,cm:42,rice:2500,chick:20,tofu:8,tempe:200,egg:10,toge:300,sambal:150},
+ {pax:30,price:1250000,tampah:23000,cm:47,rice:3500,chick:24,tofu:12,tempe:300,egg:12,toge:430,sambal:190},
+ {pax:40,price:1450000,tampah:25000,cm:52,rice:4500,chick:27,tofu:16,tempe:400,egg:16,toge:600,sambal:230}
  ][i]; const f=i===0?1:i===1?1.25:1.5; const g=Math.round;
  const recipes=[
   rec('Nasi liwet teri pete',`±${N(x.rice*2/1000)} kg nasi matang`,[ing('rice',x.rice,'beras'),ing('oil',x.rice*.06,'minyak goreng'),ing('salt',3*f),ing('totole',3*f),ing('sasa',4*f),ing('teri',x.rice*.05,'teri Medan'),ing('sereh',i+1),ing('salam',2+i),ing('jeruk',2+i),ing('onion',x.rice*.025,'bawang merah'),ing('garlic',x.rice*.02,'bawang putih'),ing('pete',[.5,.75,1][i],'pete papan')]),
