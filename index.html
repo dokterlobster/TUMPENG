@@ -38,12 +38,24 @@
   /* Keep text flat; the only filled control is the functional package toggle. */
   .notice{display:none}.meta{gap:16px}.tag{padding:0;background:transparent!important;border-radius:0!important;color:var(--muted)}.picker{padding:0 0 12px;border:0;border-radius:0;border-bottom:1px solid var(--line);background:transparent}.segmented{padding:3px;gap:2px;border:1px solid var(--line);border-radius:10px;background:var(--soft)}.segmented button{padding:8px 11px;border-radius:7px}.segmented button[aria-selected="true"]{background:var(--dark);box-shadow:0 1px 2px rgb(23 35 29 / .14);color:#fff;border-bottom:0;margin-bottom:0}.active-summary{border:0;border-radius:0;background:transparent}.active-intro,.metric{padding-left:0;padding-right:17px;border-right:0}.metric{padding-left:17px;border-left:1px solid var(--line)}.active-summary>:last-child{padding-right:0}.status,.card-status{display:inline!important;width:auto!important;margin:0!important;padding:0!important;border-radius:0!important;background:transparent!important;font-style:normal}.status.good{color:var(--good)}.status.warn{color:var(--warn)}#packages .package{padding:20px 0 8px;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;box-shadow:none}.recipe-body{border-radius:0;background:transparent;padding-left:0;padding-right:0}
   @media(max-width:700px){.meta{gap:5px 12px}.picker{padding-bottom:11px}.segmented{gap:2px}.segmented button{padding:10px 6px}.active-intro,.metric{padding-left:0;padding-right:0}.metric{padding-left:12px;border-left:1px solid var(--line)}.active-summary .metric:nth-child(2){padding-left:0;border-left:0}.active-summary .metric:nth-child(4){padding-left:0;border-left:0}#packages .package{padding-top:17px}.recipe-body{padding-left:0;padding-right:0}}
+  /* One image per selection: compact side-by-side overview on wide screens, stacked on phones. */
+  .package-overview{display:grid;grid-template-columns:minmax(260px,.92fr) minmax(0,1.08fr);gap:24px;align-items:stretch;margin-top:16px;padding:0 0 17px;border-bottom:1px solid var(--line)}
+  .package-visual{min-height:255px;margin:0;overflow:hidden;background:var(--soft)}
+  .package-visual img{display:block;width:100%;height:100%;min-height:255px;object-fit:cover;object-position:center}
+  .package-overview #active-summary{margin:0;display:flex;flex-wrap:wrap;align-content:center;gap:0}
+  .package-overview .active-summary{width:100%;grid-template-columns:repeat(3,minmax(0,1fr));margin:0}
+  .package-overview .active-intro{grid-column:1/-1;padding:0 0 14px;border-bottom:1px solid var(--line)}
+  .package-overview .metric{padding-top:14px;padding-bottom:0}
+  .package-overview .metric:first-of-type{padding-left:0;border-left:0}
+  @media(max-width:900px){.package-overview{grid-template-columns:1fr;gap:15px}.package-visual,.package-visual img{min-height:0;height:auto;aspect-ratio:3/2}.package-overview #active-summary{display:block}.package-overview .active-summary{display:grid}.package-overview .active-intro{padding:0 0 13px}.package-overview .metric{padding-top:13px}.package-overview .metric:first-of-type{padding-left:0}}
+  @media(max-width:700px){.package-overview{gap:14px;margin-top:13px;padding-bottom:14px}.package-overview .active-summary{grid-template-columns:1fr 1fr}.package-overview .active-intro{grid-column:1/-1}.package-overview .metric{padding:13px 0 0}.package-overview .metric:nth-child(3){padding-left:12px;border-left:1px solid var(--line)}.package-overview .metric:nth-child(4){grid-column:1/-1;padding-left:0;border-left:0}.package-visual,.package-visual img{aspect-ratio:3/2}}
+  @media print{.package-overview{display:none}}
 </style>
 </head>
 <body><main class="page">
-  <header class="masthead"><div><div class="eyebrow">Costing sheet · all-in HPP</div><h1>Tumpeng kuning &amp;<br>tumpeng liwet</h1><p class="subtitle">6 paket · BOM bahan mentah → subresep → paket</p><div class="meta"><span class="tag">Target HPP 30–35%</span><span class="tag">Overhead Rp2.100/pax</span><span class="tag">Harga jual Rp950rb–Rp1,35jt</span></div></div><button class="print-button" type="button" onclick="window.print()">Cetak / simpan PDF</button></header>
+  <header class="masthead"><div><div class="eyebrow">Costing sheet · all-in HPP</div><h1>Tumpeng kuning &amp;<br>tumpeng liwet</h1></div><button class="print-button" type="button" onclick="window.print()">Cetak / simpan PDF</button></header>
   <div class="notice">Pilih paket untuk melihat ringkasan HPP dan rincian bahan.</div>
-  <section class="workbench" aria-labelledby="pilih-paket"><h2 id="pilih-paket">Pilih paket</h2><div id="picker"></div><div id="active-summary" aria-live="polite"></div><div id="cards" hidden></div></section>
+  <section class="workbench" aria-labelledby="pilih-paket"><h2 id="pilih-paket">Pilih paket</h2><div id="picker"></div><div class="package-overview"><figure id="package-image" class="package-visual" aria-live="polite"></figure><div id="active-summary" aria-live="polite"></div></div><div id="cards" hidden></div></section>
   <div id="packages"></div>
   <footer class="foot">HPP all-in belum mencakup delivery, komisi platform, dan promo.</footer>
 </main>
@@ -90,6 +102,10 @@ const makeLiwet=i=>{const x=[
   rec('Garnish & daun pisang','1 set',[ing('cabe',30*f,'cabe merah besar'),ing('cabbage',60*f,'timun / alokasi sayur'),ing('banana',[.2,.25,.33][i],'daun pisang')],'Estimasi timun menggunakan harga sayur sebagai alokasi konservatif.')
  ]; return {...x,type:'Tumpeng Liwet',recipes}; };
 const packs=[0,1,2].map(makeKuning).concat([0,1,2].map(makeLiwet));
+const packageImages={
+  'Tumpeng Kuning':{20:'assets/kuning-20.png',30:'assets/kuning-30.png',40:'assets/kuning-40.png'},
+  'Tumpeng Liwet':{20:'assets/liwet-20.png',30:'assets/liwet-30.png',40:'assets/liwet-40.png'}
+};
 function foodCost(p){return p.recipes.reduce((s,r)=>s+r.cost,0)} function allIn(p){return foodCost(p)+p.tampah+p.pax*2100}
 function rowForIng(x){const u=U[x.key]; if(!u||x.qty===0)return `<tr><td>${x.label}</td><td class="num">${x.qty===0?'secukupnya':fmtQty(x.qty,'')}</td><td class="num">—</td><td class="num">—</td></tr>`;return `<tr><td>${x.label}</td><td class="num">${fmtQty(x.qty,u[1])}</td><td class="num">${R(u[0])}/${u[1]}</td><td class="num">${R(u[0]*x.qty)}</td></tr>`}
 function componentTable(p){return p.recipes.map(r=>`<tr><td>${r.name}</td><td>${r.output}</td><td class="num">${R(r.cost)}</td></tr>`).join('')}
@@ -100,6 +116,7 @@ let activeType='Tumpeng Kuning',activePax=20;
 function activePack(){return packs.find(p=>p.type===activeType&&p.pax===activePax)}
 function pickerMarkup(){return `<div class="picker"><div class="selection-controls"><span class="picker-label">Jenis</span><div class="segmented" role="tablist" aria-label="Jenis tumpeng"><button type="button" role="tab" data-type="Tumpeng Kuning" aria-selected="${activeType==='Tumpeng Kuning'}">Kuning</button><button type="button" role="tab" data-type="Tumpeng Liwet" aria-selected="${activeType==='Tumpeng Liwet'}">Liwet</button></div></div><div class="selection-controls"><span class="picker-label">Porsi</span><div class="segmented" role="tablist" aria-label="Jumlah porsi">${[20,30,40].map(pax=>`<button type="button" role="tab" data-pax="${pax}" aria-selected="${activePax===pax}">${pax} pax</button>`).join('')}</div></div></div>`}
 function activeSummary(p){const all=allIn(p),pct=all/p.price*100,ok=pct<=35;return `<div class="active-summary"><div class="active-intro"><div class="eyebrow ${p.type==='Tumpeng Kuning'?'pkg-kind-kuning':'pkg-kind-liwet'}">${p.type}</div><h3>${p.pax} pax</h3><p>Tampah ${p.cm} cm · overhead sudah termasuk</p></div><div class="metric"><span>Harga jual</span><b>${R(p.price)}</b></div><div class="metric hpp"><span>Total HPP</span><b>${R(all)}</b></div><div class="metric hpp"><span>HPP all-in</span><b>${pct.toFixed(1).replace('.',',')}%</b><em class="status ${ok?'good':'warn'}">${ok?'Dalam target':'Di atas target'}</em></div></div>`}
-function renderActivePackage(){const p=activePack();document.querySelector('#picker').innerHTML=pickerMarkup();document.querySelector('#active-summary').innerHTML=activeSummary(p);document.querySelector('#packages').innerHTML=packageMarkup(p);document.querySelectorAll('[data-type]').forEach(button=>button.addEventListener('click',()=>{activeType=button.dataset.type;renderActivePackage()}));document.querySelectorAll('[data-pax]').forEach(button=>button.addEventListener('click',()=>{activePax=Number(button.dataset.pax);renderActivePackage()}))}
+function packageVisual(p){const src=packageImages[p.type][p.pax];return `<img src="${src}" alt="Mockup ${p.type.toLowerCase()} ${p.pax} porsi, tampak samping" width="1536" height="1024">`}
+function renderActivePackage(){const p=activePack();document.querySelector('#picker').innerHTML=pickerMarkup();document.querySelector('#package-image').innerHTML=packageVisual(p);document.querySelector('#active-summary').innerHTML=activeSummary(p);document.querySelector('#packages').innerHTML=packageMarkup(p);document.querySelectorAll('[data-type]').forEach(button=>button.addEventListener('click',()=>{activeType=button.dataset.type;renderActivePackage()}));document.querySelectorAll('[data-pax]').forEach(button=>button.addEventListener('click',()=>{activePax=Number(button.dataset.pax);renderActivePackage()}))}
 renderActivePackage();
 </script></body></html>
