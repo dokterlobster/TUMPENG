@@ -107,10 +107,152 @@
   @media(max-width:700px){.menu-builder{width:100%;height:100dvh;max-height:100dvh;border:0;border-radius:0}.builder-modal-shell{max-height:100dvh;padding:0 18px calc(22px + env(safe-area-inset-bottom))}.menu-builder .builder-heading{margin:0 -18px 22px;padding:15px 18px 0}.builder-stage-nav{gap:22px}.builder-stage-nav button{min-height:38px;padding-bottom:11px}.builder-section,.builder-section:first-child{padding-bottom:23px}.builder-section+.builder-section{padding-top:22px}.builder-raw-cost-preview{display:grid;grid-template-columns:1fr 1fr;gap:7px 14px}.builder-raw-cost-preview span{display:grid;gap:2px}.builder-raw-cost-preview span:last-child{grid-column:1/-1;padding-top:8px;border-top:1px solid var(--line)}.builder-heading-actions{padding-top:0}.draft-state{font-size:10px}}
   @media(max-width:380px){.mobile-nav{top:0;right:0;width:calc(100% - 18px);height:100dvh;border-radius:0}.builder-modal-shell{padding-inline:14px}.menu-builder .builder-heading{margin-inline:-14px;padding-inline:14px}}
   @media print{.header-actions,.menu-builder,.mobile-nav,.mobile-nav-scrim,.mobile-nav-trigger{display:none!important}}
+  /* Ledger workspace. Grounded in finance and inventory tools: compact chrome, one active record, flat data. */
+  :root{
+    --ink:#17211c;--muted:#68736c;--paper:#fff;--ground:#f3f5f3;
+    --line:#dfe4e0;--soft:#f2f5f3;--accent:#176b50;--accent-pale:#e5f1ec;
+    --dark:#18342a;--focus:#176b50;--focus-ring:rgb(23 107 80 / .22)
+  }
+  body{background:var(--ground);font-size:13px;color:var(--ink)}
+  .page{width:min(100%,1440px);max-width:none;padding:0 36px 48px;border-top:0;background:#fff;box-shadow:0 0 0 1px rgb(23 33 28 / .035)}
+  .masthead{min-height:72px;padding:14px 0;align-items:center;border-bottom:1px solid var(--line)}
+  .masthead>div:first-child{display:flex;align-items:baseline;gap:14px;min-width:0}
+  .masthead .eyebrow{display:none}
+  .masthead h1{font-size:23px;line-height:1.1;letter-spacing:-.035em;font-weight:760;white-space:nowrap}
+  .updated-at{margin:0;color:var(--muted);font-size:11px;white-space:nowrap}
+  .header-actions{display:flex!important;align-items:center;gap:8px}
+  .builder-open,.print-button{min-height:38px;padding:0 13px;border-radius:7px!important;font-size:11px;letter-spacing:0;box-shadow:none}
+  .builder-open{border:1px solid var(--accent);background:var(--accent);color:#fff}
+  .builder-open:before{color:#fff}.builder-open:hover{border-color:var(--dark);background:var(--dark);color:#fff}
+  .print-button{border:1px solid var(--line);background:#fff;color:var(--ink)}
+  .print-button:hover{border-color:#b8c2bb;background:var(--soft);color:var(--ink);transform:none}
+
+  .catalog-layout{grid-template-columns:208px minmax(0,1fr);gap:32px;margin-top:20px}
+  .catalog-sidebar{top:18px;min-height:calc(100dvh - 108px);max-height:calc(100dvh - 36px);padding:4px 22px 8px 0;border:0;border-right:1px solid var(--line);background:transparent}
+  .catalog-sidebar-head{padding:0 0 14px;border-bottom:1px solid var(--line)}
+  .catalog-sidebar-head strong{font-size:13px}.catalog-sidebar-head small{font-size:10px}
+  .catalog-group{padding:17px 0 5px}.catalog-heading,.mobile-nav-label{margin:0 0 6px;font-size:10px;letter-spacing:.04em;text-transform:none}
+  .nav-product{grid-template-columns:minmax(0,1fr) 12px!important;min-height:38px;padding:8px 9px!important;border-radius:6px!important;color:#57625b;font-size:12px;transition:background .12s ease,color .12s ease}
+  .nav-product .nav-dot{display:none}.nav-product .nav-arrow{grid-column:2;grid-row:1;justify-self:end;font-size:15px}
+  .nav-product:hover{background:var(--soft);color:var(--ink)}
+  .nav-product.is-active{background:var(--accent-pale);color:var(--dark);font-weight:800}
+  .nav-product.is-active .nav-arrow{color:var(--accent)}
+  .catalog-sidebar-actions{padding-top:13px;padding-right:0}
+  .catalog-sidebar-actions button{min-height:40px;border-radius:6px;font-size:11px}
+  .catalog-sidebar-actions button:first-child{background:var(--accent)}
+  .catalog-sidebar-actions button:first-child:hover{background:var(--dark)}
+
+  .catalog-workspace{padding-top:0}
+  .workspace-top{min-height:52px;padding:2px 0 12px;align-items:end;border-bottom:1px solid var(--line)}
+  .workspace-top:before{content:none}
+  .workspace-top .eyebrow{margin-bottom:3px;color:var(--muted);font-size:9px;letter-spacing:.04em;text-transform:none}
+  .workspace-top h2{font-size:21px;letter-spacing:-.025em}
+  .workspace-top .segmented{padding:2px;border-color:var(--line);border-radius:7px;background:var(--soft)}
+  .workspace-top .segmented button{min-height:32px;padding:0 12px;border-radius:5px;font-size:11px}
+  .workspace-top .segmented button[aria-selected="true"]{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgb(23 33 28 / .12)}
+
+  .package-overview{grid-template-columns:248px minmax(0,1fr);gap:26px;margin-top:18px;padding-bottom:18px;align-items:center}
+  .package-visual{height:166px;border-radius:8px;background:var(--soft)}
+  .package-visual img{object-fit:cover}
+  .package-overview #active-summary{align-content:stretch}
+  .package-overview .active-summary{align-self:stretch;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .package-overview .active-intro{align-self:start;padding:0 0 13px}
+  .package-overview .active-intro .eyebrow{margin-bottom:4px;color:var(--muted);font-size:9px;letter-spacing:.04em;text-transform:none}
+  .package-overview .active-intro h3{font-size:20px;letter-spacing:-.025em}
+  .package-overview .active-intro p{margin-top:4px;font-size:10px}
+  .package-overview .metric{min-width:0;padding:13px 15px 0;border-left:1px solid var(--line)}
+  .package-overview .metric:first-of-type{padding-left:0;border-left:0}
+  .metric span{font-size:10px;letter-spacing:0}.metric b{font-size:17px;letter-spacing:-.025em}
+  .package-overview .metric:last-child b{font-size:22px}
+  .status{display:block!important;margin-top:4px!important;font-size:10px!important;font-weight:750!important}
+  .status.good{color:var(--good)}.status.warn{color:var(--warn)}
+
+  .detail-tabs{gap:24px;margin-top:0}
+  .detail-tabs button{min-height:42px;padding:0 1px 10px;font-size:11px}
+  .detail-tabs button[aria-selected="true"]{border-bottom-color:var(--accent);color:var(--ink)}
+  #packages .package{padding-top:18px}
+  .package .detail-summary>h3,.package .detail-recipes>h3,.package .detail-addons>h3{font-size:12px}
+  table{font-size:12px}th{font-size:10px;letter-spacing:0;text-transform:none}
+  th,td{padding:9px 6px}.summary-table tr.total td{background:transparent;border-top:1px solid var(--ink)}
+  .summary-table tr.allin td,.catering-breakdown tr.total td{background:var(--dark);color:#fff}
+  summary{min-height:44px;padding:9px 0;font-size:12px}
+  summary:before{font-family:inherit;font-size:17px;color:var(--accent)}
+  details[open] summary{color:var(--ink)}
+  .foot{margin-top:30px;padding:13px 0 0}
+
+  .mobile-nav{width:min(320px,calc(100% - 24px));background:#fff}
+  .mobile-nav-head{min-height:62px;padding:10px 10px 10px 16px}
+  .mobile-nav-body{padding:5px 12px}.mobile-nav-group{padding:13px 0 4px}
+  .mobile-nav .nav-product{padding-left:9px!important}
+  .mobile-nav-actions{grid-template-columns:1fr 1fr;padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
+  .mobile-nav-action{min-height:44px;border-radius:6px;font-size:11px}
+  .mobile-nav-action.primary{border-color:var(--accent);background:var(--accent)}
+
+  .menu-builder{width:min(1120px,calc(100% - 32px));border-radius:10px;box-shadow:0 26px 72px rgb(18 32 25 / .25)}
+  .menu-builder::backdrop{background:rgb(18 28 23 / .48);backdrop-filter:none}
+  .builder-modal-shell{background:#fff}
+  .menu-builder .builder-heading{padding-top:18px;background:#fff}
+  .menu-builder .builder-heading .eyebrow{display:none}
+  .menu-builder .builder-heading h2{font-size:21px}
+  .menu-builder .builder-heading p{font-size:11px}
+  .builder-stage-nav{gap:23px;margin-top:13px}
+  .builder-stage-nav button[aria-selected="true"]{border-bottom-color:var(--accent);color:var(--ink)}
+  .builder-layout{grid-template-columns:minmax(0,1.45fr) minmax(260px,.72fr);gap:32px}
+  .builder-layout>aside{padding-left:26px}
+  .builder-field label,.builder-add label,.builder-packaging-add label,.review-login label,.builder-cut-field label{font-size:10px}
+  .builder-field input,.builder-field select,.builder-add select,.builder-add input,.review-login input,.builder-packaging-add select,.builder-packaging-add input,.builder-tampah-select,.builder-cut-field select{border-radius:6px}
+  .builder-add button,.builder-save-sub,.builder-packaging-add button,.builder-submit,.review-actions button,.review-login button{border-radius:6px;background:var(--accent)}
+  .builder-add button:hover,.builder-save-sub:hover,.builder-packaging-add button:hover,.builder-submit:hover,.review-actions button:hover,.review-login button:hover{background:var(--dark)}
+  .builder-summary-row.total,.builder-summary-row.pct,.builder-summary-row.pct.is-warn{background:transparent}
+
+  @media(min-width:701px) and (max-width:1100px){
+    .package-overview{grid-template-columns:220px minmax(0,1fr);max-width:none;margin-left:0;margin-right:0}
+    .package-visual{height:158px}.package-overview .active-summary{grid-template-columns:repeat(3,minmax(0,1fr))}
+  }
+  @media(max-width:900px){
+    .page{padding:0 24px 42px}.header-actions{display:none!important}
+    .masthead{min-height:64px}.mobile-nav-trigger{display:grid;width:40px;height:40px;min-height:40px;border-radius:7px}
+    .catalog-layout{margin-top:18px}.workspace-top{padding-left:0}
+  }
+  @media(max-width:700px){
+    body{background:#fff}.page{padding:0 16px 36px;box-shadow:none}
+    .masthead{min-height:58px;padding:9px 0}.masthead>div:first-child{display:grid;gap:2px}
+    .masthead h1{font-size:19px}.updated-at{font-size:9px}
+    .catalog-layout{margin-top:14px}
+    .workspace-top{min-height:0;gap:11px;padding-bottom:12px}
+    .workspace-top .eyebrow{display:none}.workspace-top h2{font-size:19px}
+    .workspace-top .selection-controls{gap:8px}.workspace-top .segmented button{min-height:36px;padding-inline:8px}
+    .package-overview{grid-template-columns:1fr;gap:13px;margin-top:14px;padding-bottom:14px}
+    .package-visual{height:148px;border-radius:7px}
+    .package-overview .active-summary{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .package-overview .active-intro{grid-column:1/-1;padding-bottom:11px}
+    .package-overview .active-intro h3{font-size:18px}
+    .package-overview .metric,.package-overview .metric:nth-child(3),.package-overview .metric:nth-child(4){grid-column:auto;padding:10px 9px 0;border-top:0;border-left:1px solid var(--line)}
+    .package-overview .metric:nth-child(2){padding-left:0;border-left:0}
+    .metric span{font-size:9px}.metric b{font-size:13px;white-space:nowrap}
+    .package-overview .metric:last-child b{font-size:17px}
+    .status{font-size:9px!important;white-space:normal}
+    .detail-tabs{gap:20px}.detail-tabs button{min-height:40px}
+    #packages .package{padding-top:14px}
+    .summary-table th,.summary-table td{font-size:11px}
+    .menu-builder .builder-heading{padding-top:13px}.menu-builder .builder-heading h2{font-size:18px}
+  }
+  @media(max-width:360px){
+    .page{padding-inline:13px}.masthead h1{font-size:18px}
+    .workspace-top .segmented button{font-size:10px;padding-inline:5px}
+    .package-overview .active-summary{grid-template-columns:1fr 1fr}
+    .package-overview .metric:last-child{grid-column:1/-1;padding-left:0;border-left:0;border-top:1px solid var(--line)}
+    .package-overview .metric:last-child{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:8px}
+    .package-overview .metric:last-child .status{grid-column:1/-1}
+  }
+  @media print{
+    .page{padding:0 10mm 14mm;box-shadow:none}.masthead{min-height:0;padding:8mm 0 5mm}
+    .masthead>div:first-child{display:block}.masthead h1{font-size:24px}.updated-at{margin-top:4px}
+  }
 </style>
 </head>
 <body><main class="page">
-  <header class="masthead"><div><div class="eyebrow">Costing sheet · all-in HPP</div><h1>Katalog HPP</h1><div class="updated-at">Harga diperbarui: 24 Agustus 2026</div></div><div class="header-actions"><button class="builder-open" type="button" data-open-builder>Buat menu</button><button class="print-button" type="button" aria-label="Cetak atau simpan PDF" onclick="printCurrentPackage()">Simpan PDF</button></div><button id="mobile-nav-trigger" class="mobile-nav-trigger" type="button" aria-controls="mobile-nav" aria-expanded="false" aria-label="Buka menu"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button></header>
+  <header class="masthead"><div><h1>Katalog HPP</h1><div class="updated-at">Harga diperbarui: 24 Agustus 2026</div></div><div class="header-actions"><button class="builder-open" type="button" data-open-builder>Buat menu</button><button class="print-button" type="button" aria-label="Cetak atau simpan PDF" onclick="printCurrentPackage()">Simpan PDF</button></div><button id="mobile-nav-trigger" class="mobile-nav-trigger" type="button" aria-controls="mobile-nav" aria-expanded="false" aria-label="Buka menu"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button></header>
   <button id="mobile-nav-scrim" class="mobile-nav-scrim" type="button" aria-label="Tutup menu" hidden></button><nav id="mobile-nav" class="mobile-nav" aria-label="Navigasi katalog" hidden><div class="mobile-nav-head"><div><strong>Katalog HPP</strong><small>Pilih kategori menu</small></div><button id="mobile-nav-close" class="mobile-nav-close" type="button" aria-label="Tutup menu">×</button></div><div class="mobile-nav-body"><div class="mobile-nav-group"><span class="mobile-nav-label">Tumpeng</span><button class="mobile-nav-link nav-product" type="button" data-type="Tumpeng Kuning"><span class="nav-dot nav-dot-yellow"></span><span>Nasi kuning</span><span class="nav-arrow">›</span></button><button class="mobile-nav-link nav-product" type="button" data-type="Tumpeng Liwet"><span class="nav-dot nav-dot-liwet"></span><span>Nasi liwet</span><span class="nav-arrow">›</span></button></div><div class="mobile-nav-group"><span class="mobile-nav-label">Catering</span><button class="mobile-nav-link nav-product" type="button" data-type="Catering Premium"><span class="nav-dot nav-dot-premium"></span><span>Premium</span><span class="nav-arrow">›</span></button><button class="mobile-nav-link nav-product" type="button" data-type="Catering Bento"><span class="nav-dot nav-dot-bento"></span><span>Bento</span><span class="nav-arrow">›</span></button><button class="mobile-nav-link nav-product" type="button" data-type="Catering Kids"><span class="nav-dot nav-dot-kids"></span><span>Kids</span><span class="nav-arrow">›</span></button></div></div><div class="mobile-nav-actions"><button class="mobile-nav-action primary" type="button" data-open-builder><span aria-hidden="true">＋</span><span class="nav-action-label">Buat menu</span></button><button class="mobile-nav-action secondary" type="button" onclick="printCurrentPackage()"><span aria-hidden="true">↓</span><span>Simpan PDF</span></button></div></nav>
   <section class="catalog-layout" aria-label="Katalog HPP">
     <aside class="catalog-sidebar" aria-label="Kategori produk">
