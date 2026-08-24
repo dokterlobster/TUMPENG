@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "project": {
+    "name": "referenced-chatgpt-conversation-this-is-an",
+    "productType": "printable costing worksheet",
+    "stack": ["vanilla HTML", "CSS", "JavaScript"]
+  },
+  "sources": {
+    "tokens": [],
+    "components": [],
+    "assets": [],
+    "instructions": []
+  },
+  "design": {
+    "colorMode": "light",
+    "colors": {"base":"warm paper","ink":"charcoal","accent":"muted amber"},
+    "typography": {"display":"Georgia","body":"Aptos / Segoe UI"},
+    "spacing": {"density":"compact data, generous section rhythm"},
+    "radius": {"use":"minimal"},
+    "shadows": {},
+    "motion": {},
+    "density": "compact"
+  },
+  "components": {
+    "installed": [],
+    "preferredPrimitives": [],
+    "patterns": []
+  },
+  "constraints": {
+    "must": [],
+    "avoid": []
+  },
+  "decisions": ["Use an editorial costing-sheet direction: flat rules, restrained amber accent, compact tabular data, and no rounded dashboard-card treatment.", "Keep package summaries readable on phone widths; reserve horizontal scrolling only for raw-ingredient detail tables.", "Use a four-value package summary (pax, HPP percentage, price, total HPP) rather than a wide comparison table.", "Evolve the package selector into two clearly grouped, app-like finance panels, ordered 20 → 30 → 40 pax, with compact target-status feedback and direct links to each detailed package.", "Replace the six-package overview with one compact selected-package workspace: tabs for Kuning/Liwet and segmented 20/30/40 pax controls, visible key metrics, and progressive disclosure for raw-recipe details.", "Show a dedicated side-view food mockup for each selected type and pax; pair it beside metrics on smaller screens.", "Use the stacked package overview through iPad landscape (up to 1100px); on narrow phones, reduce the metric summary to a single readable column.", "Use segmented category toggles for Tumpeng and Catering on phone/tablet, replacing the mobile product dropdown entirely.", "For catering, use one menu selector per category rather than a grid of cards; expose selling price, total HPP, percentage, and component costs in separate compact views.", "Use an inline disclosure per catering component: a user can open a component such as Ayam Kadewatan to see its batch-level raw ingredients and costs without leaving the selected menu.", "Use the same one-row segmented toggle as Tumpeng for Catering menus; use short labels Paket 1–4, A–F, and Kids A–D so it remains responsive without horizontal scrolling.", "Use the four supplied Premium product images for Nasi Ayam Asap, Nasi Ayam Ulam, Nasi Campur Bali, and Nasi Kadewatan.", "For Bento and Kids, expose every available raw subrecipe as an inline disclosure; retain a normal component line only when the source data does not provide its recipe.", "Place catering add-on choices in a dedicated Tambahan detail tab, with simple add/remove rows; selected items update the total HPP in Ringkasan immediately.", "Show a concise last-price-update date below the page title and provide a Hapus semua action in Tambahan.", "Use a universal HPP threshold: below 40% is green and labelled Dalam target; 40% or more is orange and labelled Belum target.", "Add a progressive local menu-builder workflow: raw ingredients and finished submenus are distinct add flows, operational extras roll into Total HPP, and submission moves a saved draft into a dedicated reviewer approval state."],
+  "evidence": [],
+  "generatedAt": "2026-08-22T09:34:12.426Z"
+}
