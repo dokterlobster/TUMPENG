@@ -249,6 +249,7 @@ let viewBeforePrint=null;
 const printPackageMarkup=p=>{const previousView=activeView,views=p.kind==='catering'?['summary','recipes','addons']:['summary','recipes'],blocks=views.map(view=>{activeView=view;const markup=p.kind==='catering'?cateringMarkup(p):packageMarkup(p);return markup.replace(/^<section\b[^>]*>/,'').replace(/<\/section>$/,'')});activeView=previousView;return '<section class="package print-package">'+blocks.join('')+'</section>'};
 const renderForPrint=()=>{if(viewBeforePrint!==null)return;viewBeforePrint=activeView;const area=document.querySelector('#packages');area.innerHTML=printPackageMarkup(activePack());area.querySelectorAll('details').forEach(detail=>{detail.open=true})};
 const restoreAfterPrint=()=>{if(viewBeforePrint===null)return;activeView=viewBeforePrint;viewBeforePrint=null;renderActivePackage()};
-if(typeof window!=='undefined'){window.printCurrentPackage=()=>{renderForPrint();void document.body.offsetHeight;window.print()};window.addEventListener('beforeprint',renderForPrint);window.addEventListener('afterprint',restoreAfterPrint);if('requestIdleCallback' in window)window.requestIdleCallback(prefetchProductImages,{timeout:900});else window.setTimeout(prefetchProductImages,250)}
+function printCurrentPackage(){renderForPrint();void document.body.offsetHeight;window.print()}
+if(typeof window!=='undefined'){window.addEventListener('beforeprint',renderForPrint);window.addEventListener('afterprint',restoreAfterPrint);if('requestIdleCallback' in window)window.requestIdleCallback(prefetchProductImages,{timeout:900});else window.setTimeout(prefetchProductImages,250)}
 renderActivePackage();
 </script></body></html>
